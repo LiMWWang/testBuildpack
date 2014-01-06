@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+$stdout.sync = true
+$:.unshift File.expand_path('../../lib', __FILE__)
+require 'global'
+require 'main_pack'
+require 'fileutils'
+ 
+build_path = ARGV[0]
+cache_path = ARGV[1]
+FileUtils.mkdir_p(build_path)
+FileUtils.mkdir_p(cache_path)
+# 主要逻辑都放在MainPack里了，无非就是下载、配置
+pack = MainPack.new(Global.new(build_path, cache_path))
+pack.compile
